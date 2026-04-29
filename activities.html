@@ -3,488 +3,235 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Core Activities — HGY Mission</title>
-  <meta name="description" content="The 15 core activities of HGY Mission — a faith-based human rights organisation protecting dignity across Africa."/>
-  <meta property="og:image" content="https://i.imgur.com/OuzA14x.png"/>
+  <title>Activities — HGY Mission</title>
+  <meta name="description" content="Our activities translate project goals into practical action within communities. HGY Mission regularly conducts outreach, training, advocacy, and emergency response."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --p:#5c0a2e;--pd:#3d0620;--pm:#7a1040;--pl:#a3315a;--w:#ffffff;
-      --text:#1e0210;--muted:#7a5068;
-      --gb:rgba(255,255,255,0.52);--gh:rgba(255,255,255,0.80);
-      --gborder:rgba(255,255,255,0.70);--gshadow:0 8px 40px rgba(92,10,46,0.09);
-      --blur:blur(20px);--blurs:blur(12px);
-    }
-    html{scroll-behavior:smooth}
-    body{font-family:'Nunito',sans-serif;background:var(--w);color:var(--text);overflow-x:hidden;cursor:none}
     body::before{content:'';position:fixed;inset:0;z-index:-1;
-      background:radial-gradient(ellipse 70% 55% at 8% 12%,rgba(92,10,46,0.06) 0%,transparent 55%),
-        radial-gradient(ellipse 55% 45% at 92% 88%,rgba(163,49,90,0.05) 0%,transparent 55%),#fff;
+      background:radial-gradient(ellipse 70% 55% at 8% 12%,rgba(92,10,46,0.07) 0%,transparent 55%),
+        radial-gradient(ellipse 55% 45% at 92% 88%,rgba(163,49,90,0.06) 0%,transparent 55%),#fff;
       pointer-events:none}
-    @media(pointer:coarse){body{cursor:auto}.cursor-dot,.cursor-ring{display:none}}
-    .cursor-dot{position:fixed;top:0;left:0;z-index:9999;width:9px;height:9px;border-radius:50%;background:var(--p);pointer-events:none;transform:translate(-50%,-50%)}
-    .cursor-ring{position:fixed;top:0;left:0;z-index:9998;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--p);pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s}
-
-    /* NAV */
-    nav{position:fixed;top:0;width:100%;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:.85rem 3rem;background:var(--gh);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-bottom:1px solid var(--gborder);box-shadow:0 2px 20px rgba(92,10,46,0.07);transition:background .3s,box-shadow .3s}
-    nav.scrolled{background:rgba(255,255,255,0.96);box-shadow:0 4px 28px rgba(92,10,46,0.11)}
-    .nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
-    .nav-logo img{width:40px;height:40px;border-radius:8px;object-fit:contain}
-    .nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
-    .nav-logo-abbr{font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:900;color:var(--p);letter-spacing:.03em}
-    .nav-logo-sub{font-size:.57rem;font-weight:700;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
-    .nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center}
-    .nav-links a{font-size:.79rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--muted);position:relative;transition:color .2s}
-    .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--p);transition:width .25s}
-    .nav-links a:hover{color:var(--p)}
-    .nav-links a:hover::after{width:100%}
-    .nav-links a.active-link{color:var(--p)}
-    .nav-links a.active-link::after{width:100%}
-    .nav-cta{background:var(--p)!important;color:#fff!important;padding:.46rem 1.3rem!important;border-radius:100px;font-weight:900!important}
-    .nav-cta::after{display:none!important}
-    .nav-cta:hover{background:var(--pm)!important}
-    .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-    .nav-burger span{display:block;width:23px;height:2px;background:var(--p);border-radius:2px;transition:transform .3s,opacity .3s}
-    .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .nav-burger.open span:nth-child(2){opacity:0}
-    .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-    /* PAGE HERO */
-    .page-hero{padding:9rem 3rem 6rem;background:var(--pd);position:relative;overflow:hidden}
-    .page-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(-55deg,transparent,transparent 40px,rgba(255,255,255,.02) 40px,rgba(255,255,255,.02) 41px)}
-    .page-hero-inner{position:relative;z-index:2;max-width:760px}
-    .page-breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:1.4rem}
-    .page-breadcrumb a{color:rgba(255,255,255,.32);text-decoration:none;transition:color .2s}
-    .page-breadcrumb a:hover{color:rgba(255,255,255,.7)}
-    .page-breadcrumb svg{width:12px;height:12px;stroke:rgba(255,255,255,.2)}
-    .page-eyebrow{font-family:'Space Mono',monospace;font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pl);margin-bottom:1.1rem;display:flex;align-items:center;gap:.55rem}
-    .page-eyebrow::before{content:'';display:inline-block;width:26px;height:1.5px;background:var(--pl)}
-    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:900;line-height:1.06;letter-spacing:-.02em;color:#fff}
-    .page-title em{font-style:italic;color:var(--pl)}
-    .page-body{margin-top:1.6rem;font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,.5);max-width:580px}
-    .page-hero-count{margin-top:2.5rem;display:flex;gap:2.5rem}
-    .phc-item{font-family:'Space Mono',monospace}
-    .phc-num{font-size:2.2rem;font-weight:700;color:#fff;line-height:1}
-    .phc-label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-top:.2rem}
-
-    /* FILTER BAR */
-    .filter-bar{padding:1.5rem 3rem;background:#fff;border-bottom:1px solid rgba(92,10,46,.07);position:sticky;top:70px;z-index:10;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
-    .filter-label{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:.5rem}
-    .filter-btn{background:rgba(92,10,46,.05);border:1.5px solid rgba(92,10,46,.08);border-radius:100px;padding:.35rem .95rem;font-size:.75rem;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s}
-    .filter-btn:hover,.filter-btn.active{background:var(--p);color:#fff;border-color:var(--p)}
-
-    /* ACTIVITIES GRID */
-    .activities-section{padding:6rem 3rem;position:relative;z-index:1}
-    .activities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
-    .activity-card{background:var(--gb);border:1px solid var(--gborder);backdrop-filter:var(--blurs);-webkit-backdrop-filter:var(--blurs);border-radius:22px;padding:2rem 1.8rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,background .25s;cursor:default}
-    .activity-card:hover{transform:translateY(-5px);box-shadow:0 20px 52px rgba(92,10,46,.12);background:var(--gh)}
-    .activity-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.2rem}
-    .activity-num{font-family:'Space Mono',monospace;font-size:2.2rem;font-weight:700;color:rgba(92,10,46,.1);line-height:1;flex-shrink:0}
-    .activity-icon{width:44px;height:44px;border-radius:13px;background:rgba(92,10,46,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .activity-icon svg{width:22px;height:22px;stroke:var(--p)}
-    .activity-cat{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pl);margin-bottom:.5rem;display:flex;align-items:center;gap:.35rem}
-    .activity-cat::before{content:'';width:12px;height:1px;background:var(--pl)}
-    .activity-title{font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:700;color:var(--pd);margin-bottom:.7rem;line-height:1.2}
-    .activity-desc{font-size:.86rem;line-height:1.78;color:var(--muted)}
-    .activity-tag{position:absolute;top:1.4rem;right:1.4rem;background:rgba(92,10,46,.07);border-radius:100px;padding:.25rem .7rem;font-size:.65rem;font-weight:700;color:var(--p);font-family:'Space Mono',monospace}
-
-    /* CTA BAND */
-    .cta-band{background:var(--p);padding:6rem 3rem;position:relative;z-index:1;text-align:center;overflow:hidden}
-    .cta-band::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.022) 40px,rgba(255,255,255,.022) 41px)}
-    .cta-inner{position:relative;z-index:2;max-width:660px;margin:0 auto}
-    .cta-label{font-family:'Space Mono',monospace;font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:.9rem;display:flex;align-items:center;justify-content:center;gap:.55rem}
-    .cta-label::before{content:'';width:20px;height:1.5px;background:rgba(255,255,255,.32)}
-    .cta-label::after{content:'';width:20px;height:1.5px;background:rgba(255,255,255,.32)}
-    .cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,3rem);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.02em}
-    .cta-body{font-size:1rem;line-height:1.8;color:rgba(255,255,255,.52);margin-top:1.2rem}
-    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.2rem}
-    .btn-light{background:#fff;color:var(--p);padding:.88rem 2.1rem;border-radius:100px;font-weight:900;font-size:.92rem;letter-spacing:.02em;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s}
-    .btn-light:hover{background:#f5eaf0;transform:translateY(-2px)}
-    .btn-outline{border:2px solid rgba(255,255,255,.35);color:#fff;padding:.84rem 2rem;border-radius:100px;font-weight:700;font-size:.92rem;text-decoration:none;transition:border-color .2s,background .2s}
-    .btn-outline:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.07)}
-
-    /* FOOTER */
-    footer{background:var(--pd);padding:4rem 3rem 2rem;position:relative;z-index:1}
-    footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent)}
-    .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding-top:1rem}
-    .footer-copy{font-size:.76rem;color:rgba(255,255,255,.2);font-family:'Space Mono',monospace}
-    .footer-reg{font-size:.72rem;color:rgba(255,255,255,.14);font-family:'Space Mono',monospace}
-    .footer-back{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:rgba(255,255,255,.3);font-size:.8rem;font-weight:700;transition:color .2s;margin-bottom:1.5rem}
-    .footer-back:hover{color:rgba(255,255,255,.7)}
-    .footer-back svg{width:14px;height:14px;stroke:currentColor}
-
-    /* ANIMATIONS */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .rd1{transition-delay:.08s}.rd2{transition-delay:.16s}.rd3{transition-delay:.24s}.rd4{transition-delay:.32s}.rd5{transition-delay:.4s}
-
-    /* MOBILE */
+    .activity-timeline{position:relative;padding-left:3rem;margin-top:3rem}
+    .activity-timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--p),rgba(92,10,46,.08))}
+    .timeline-item{position:relative;margin-bottom:2.5rem;padding-left:2rem}
+    .timeline-item::before{content:'';position:absolute;left:-2rem;top:6px;width:14px;height:14px;border-radius:50%;background:var(--p);border:3px solid var(--w);box-shadow:0 0 0 3px rgba(92,10,46,.15);z-index:2}
+    .timeline-item::after{content:'';position:absolute;left:calc(-2rem + 7px);top:20px;bottom:-2.5rem;width:1px;background:rgba(92,10,46,.08)}
+    .timeline-item:last-child::after{display:none}
+    .timeline-category{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pl);font-weight:700;margin-bottom:.4rem}
+    .timeline-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--pd);margin-bottom:.45rem}
+    .timeline-desc{font-size:.87rem;line-height:1.75;color:var(--muted)}
+    .activity-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+    .activity-card{background:var(--gb);border:1px solid var(--gborder);backdrop-filter:var(--blurs);border-radius:20px;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .activity-card:hover{transform:translateY(-5px);box-shadow:0 20px 52px rgba(92,10,46,.12)}
+    .activity-card-img{width:100%;height:180px;object-fit:cover}
+    .activity-card-body{padding:1.6rem 1.5rem 1.8rem}
+    .activity-card-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--pd);margin-bottom:.4rem}
+    .activity-card-desc{font-size:.83rem;line-height:1.7;color:var(--muted)}
+    .emergency-banner{background:linear-gradient(135deg,var(--pd),var(--pm));padding:5rem 3rem;position:relative;overflow:hidden}
+    .emergency-banner::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(-55deg,transparent,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px)}
+    .emergency-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .emergency-inner .section-label{color:rgba(255,255,255,.42)}
+    .emergency-inner .section-label::before{background:rgba(255,255,255,.32)}
+    .emergency-inner .section-title{color:#fff}
+    .emergency-inner .section-body{color:rgba(255,255,255,.5)}
     @media(max-width:768px){
-      nav{padding:.85rem 1.4rem}
-      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(255,255,255,.96);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-bottom:1px solid rgba(92,10,46,.09);padding:.5rem 0}
-      .nav-links.open{display:flex}
-      .nav-links li{width:100%}
-      .nav-links a{display:block;padding:.8rem 1.4rem;font-size:.87rem;border-bottom:1px solid rgba(92,10,46,.05)}
-      .nav-links a::after{display:none}
-      .nav-cta{margin:.5rem 1.4rem!important;border-radius:12px!important;text-align:center;display:block!important}
-      .nav-burger{display:flex}
-      .nav-logo-sub{display:none}
-      .page-hero{padding:7rem 1.4rem 4rem}
-      .filter-bar{padding:1rem 1.4rem;top:64px}
-      .activities-section{padding:3.5rem 1.4rem}
-      .activities-grid{grid-template-columns:1fr}
-      .cta-band{padding:4.5rem 1.4rem}
-      footer{padding:3rem 1.4rem 1.5rem}
-      .footer-bottom{flex-direction:column;align-items:flex-start}
-      .page-hero-count{gap:1.5rem;flex-wrap:wrap}
+      .activity-timeline{padding-left:2rem}
+      .activity-cards{grid-template-columns:1fr}
+      .emergency-inner{grid-template-columns:1fr;gap:2.5rem}
     }
   </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
-<nav id="mainNav">
-  <a class="nav-logo" href="index.html">
-    <img src="https://i.imgur.com/44Vc2mf.png" alt="HGY Mission"/>
-    <div class="nav-logo-text">
-      <span class="nav-logo-abbr">HGY Mission</span>
-      <span class="nav-logo-sub">Holy Ground of Yahweh</span>
-    </div>
-  </a>
-  <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html#mission">About</a></li>
-    <li><a href="index.html#programs">Programs</a></li>
-    <li><a href="activities.html" class="active-link">Activities</a></li>
-    <li><a href="index.html#goals">Our Goals</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-    <li><a href="index.html#donate" class="nav-cta">Give Now</a></li>
-  </ul>
-</nav>
-
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="page-hero-inner">
-    <div class="page-breadcrumb">
-      <a href="index.html">Home</a>
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      Core Activities
-    </div>
-    <p class="page-eyebrow">What We Do</p>
-    <h1 class="page-title">Core Activities of<br/><em>HGY Mission</em></h1>
-    <p class="page-body">A comprehensive, faith-centred framework of 15 activities through which we protect human dignity, support survivors, and build justice-conscious communities across Africa.</p>
-    <div class="page-hero-count">
-      <div class="phc-item">
-        <div class="phc-num">15</div>
-        <div class="phc-label">Core Activities</div>
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="https://i.imgur.com/OuzA14x.png" alt="HGY"/>
+      <div class="nav-logo-text">
+        <span class="nav-logo-abbr">HGY Mission</span>
+        <span class="nav-logo-sub">Holy Ground of Yahweh</span>
       </div>
-      <div class="phc-item">
-        <div class="phc-num">8</div>
-        <div class="phc-label">Nations</div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="partnerships.html">Partnerships</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="activities.html" class="active-link">Activities</a></li>
+      <li><a href="conferences.html">Conferences</a></li>
+      <li><a href="countries.html">Countries</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb">
+        <a href="index.html">Home</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>Activities</span>
       </div>
-      <div class="phc-item">
-        <div class="phc-num">120+</div>
-        <div class="phc-label">Partner Institutions</div>
-      </div>
+      <div class="page-eyebrow">In Action</div>
+      <h1 class="page-title">Trans Goals Into <em>Practical Action</em></h1>
+      <p class="page-body">Our activities translate project goals into practical action within communities. HGY Mission regularly conducts community outreach sessions, legal awareness meetings, psychosocial support sessions, training workshops, leadership seminars, and livelihood coaching programs.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <span class="filter-label">Filter</span>
-  <button class="filter-btn active" onclick="filterActivities('all',this)">All</button>
-  <button class="filter-btn" onclick="filterActivities('survivor',this)">Survivor Support</button>
-  <button class="filter-btn" onclick="filterActivities('legal',this)">Legal &amp; Rights</button>
-  <button class="filter-btn" onclick="filterActivities('faith',this)">Faith &amp; Spiritual</button>
-  <button class="filter-btn" onclick="filterActivities('community',this)">Community</button>
-  <button class="filter-btn" onclick="filterActivities('emergency',this)">Emergency Response</button>
-</div>
-
-<!-- ACTIVITIES GRID -->
-<section class="activities-section">
-  <div class="activities-grid" id="activitiesGrid">
-
-    <!-- 1 -->
-    <div class="activity-card reveal" data-cat="survivor">
-      <div class="activity-card-top">
-        <div class="activity-num">01</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+  <!-- Activity Visual Cards -->
+  <section class="content-section">
+    <div style="text-align:center;margin-bottom:2rem">
+      <div class="section-label reveal" style="justify-content:center">Community Engagement</div>
+      <h2 class="section-title reveal">What We Do on the Ground</h2>
+    </div>
+    <div class="activity-cards reveal">
+      <div class="activity-card rd1">
+        <img src="https://images.unsplash.com/photo-1577962915532-0b7a3f3dfce8?w=500&h=280&fit=crop" alt="Community outreach session" class="activity-card-img"/>
+        <div class="activity-card-body">
+          <div class="activity-card-title">Community Outreach</div>
+          <div class="activity-card-desc">Regular outreach sessions bring vital information, support services, and resources directly to communities that need them most.</div>
         </div>
       </div>
-      <div class="activity-tag">Survivor</div>
-      <div class="activity-cat">GBV Response</div>
-      <h3 class="activity-title">Safe Space for GBV Survivors</h3>
-      <p class="activity-desc">Provide a confidential, trusted environment where survivors of Gender-Based Violence can safely share experiences, receive emotional support, and access immediate guidance without fear of stigma or retaliation.</p>
-    </div>
-
-    <!-- 2 -->
-    <div class="activity-card reveal rd1" data-cat="survivor">
-      <div class="activity-card-top">
-        <div class="activity-num">02</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <div class="activity-card rd2">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=500&h=280&fit=crop" alt="Training workshop" class="activity-card-img"/>
+        <div class="activity-card-body">
+          <div class="activity-card-title">Training Workshops</div>
+          <div class="activity-card-desc">Capacity building sessions for community leaders, churches, activists, and local organisations strengthen protection systems and improve referral pathways.</div>
         </div>
       </div>
-      <div class="activity-tag">Survivor</div>
-      <div class="activity-cat">Healing</div>
-      <h3 class="activity-title">Psychosocial Support and Trauma Healing</h3>
-      <p class="activity-desc">Offer trauma-informed counselling, psychosocial first aid, and emotional healing sessions for survivors, human rights defenders, and vulnerable individuals affected by violence, threats, or displacement.</p>
-    </div>
-
-    <!-- 3 -->
-    <div class="activity-card reveal rd2" data-cat="survivor">
-      <div class="activity-card-top">
-        <div class="activity-num">03</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div class="activity-card rd3">
+        <img src="https://images.unsplash.com/photo-1591025207163-942350e47db2?w=500&h=280&fit=crop" alt="Advocacy dialogue" class="activity-card-img"/>
+        <div class="activity-card-body">
+          <div class="activity-card-title">Advocacy Dialogues</div>
+          <div class="activity-card-desc">Public awareness campaigns, youth engagement forums, and women empowerment circles form the backbone of our ongoing advocacy activities.</div>
         </div>
       </div>
-      <div class="activity-tag">Survivor</div>
-      <div class="activity-cat">Long-Term Support</div>
-      <h3 class="activity-title">Mentorship and Long-Term Follow-Up</h3>
-      <p class="activity-desc">Establish mentoring programmes that accompany survivors and defenders through recovery, helping them rebuild confidence, strengthen decision-making, and access continued support over time.</p>
     </div>
+  </section>
 
-    <!-- 4 -->
-    <div class="activity-card reveal" data-cat="emergency">
-      <div class="activity-card-top">
-        <div class="activity-num">04</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+  <!-- Timeline of Activities -->
+  <section class="content-section">
+    <div class="content-grid">
+      <div>
+        <div class="section-label reveal">Our Activities</div>
+        <h2 class="section-title reveal">From Goals to Ground Level Action</h2>
+        <p class="section-body reveal">We organise capacity building sessions for community leaders, churches, activists, and local organisations to strengthen protection systems and improve referral pathways. Advocacy dialogues, public awareness campaigns, youth engagement forums, and women empowerment circles are also part of our ongoing activities.</p>
+      </div>
+      <div class="reveal rd2">
+        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&h=750&fit=crop" alt="Community meeting and discussion" style="width:100%;border-radius:24px;object-fit:cover;box-shadow:0 24px 72px rgba(92,10,46,.18);aspect-ratio:4/5"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Timeline -->
+  <section class="content-section" style="padding-top:2rem">
+    <div style="text-align:center;margin-bottom:1rem">
+      <div class="section-label reveal" style="justify-content:center">Activity Areas</div>
+      <h2 class="section-title reveal">Key Areas of Engagement</h2>
+    </div>
+    <div class="activity-timeline reveal" style="max-width:720px;margin-left:auto;margin-right:auto">
+      <div class="timeline-item">
+        <div class="timeline-category">Community</div>
+        <div class="timeline-title">Outreach Sessions</div>
+        <div class="timeline-desc">Regular community outreach sessions bring information about rights, services, and support directly to vulnerable populations in both urban and rural settings.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-category">Legal</div>
+        <div class="timeline-title">Legal Awareness Meetings</div>
+        <div class="timeline-desc">Legal awareness meetings educate communities about their rights, available legal protections, and how to access justice systems and documentation support.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-category">Wellbeing</div>
+        <div class="timeline-title">Psychosocial Support Sessions</div>
+        <div class="timeline-desc">Psychosocial support sessions provide safe spaces for healing, counselling, and group therapy for survivors of violence, displacement, and trauma.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-category">Leadership</div>
+        <div class="timeline-title">Leadership Seminars</div>
+        <div class="timeline-desc">Leadership seminars and livelihood coaching programs equip emerging community leaders with skills, confidence, and networks for long term social participation.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-category">Empowerment</div>
+        <div class="timeline-title">Women and Youth Forums</div>
+        <div class="timeline-desc">Women empowerment circles and youth engagement forums create platforms for voices that are often marginalised to be heard, respected, and acted upon.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Response -->
+  <section class="emergency-banner">
+    <div class="emergency-inner">
+      <div>
+        <div class="section-label reveal">Crisis Response</div>
+        <h2 class="section-title reveal">Emergency Response <em>When It Matters Most</em></h2>
+        <p class="section-body reveal">In crisis situations, we coordinate emergency response activities including distribution of relief support, urgent referrals, and protection interventions for individuals at immediate risk. Our networks allow us to respond rapidly when communities face sudden displacement, violence, natural disasters, or other emergencies.</p>
+      </div>
+      <div class="reveal rd2">
+        <img src="https://images.unsplash.com/photo-1469571626390-6053e3fa20f1?w=600&h=500&fit=crop" alt="Emergency humanitarian response" style="width:100%;border-radius:24px;object-fit:cover;box-shadow:0 24px 72px rgba(0,0,0,.3)"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <a href="index.html" class="footer-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to Home
+    </a>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="https://i.imgur.com/OuzA14x.png" alt="HGY"/>
+          <div><div class="footer-abbr">HGY Mission</div><div class="footer-full">Holy Ground of Yahweh</div></div>
+        </div>
+        <p class="footer-tagline">A faith driven human rights organisation standing for the weak, the marginalised, and the forgotten.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
         </div>
       </div>
-      <div class="activity-tag">Emergency</div>
-      <div class="activity-cat">Crisis Response</div>
-      <h3 class="activity-title">Emergency Relocation for Harassed Human Rights Defenders</h3>
-      <p class="activity-desc">Coordinate urgent temporary relocation for threatened defenders through church networks, faith communities, and trusted protection partners to ensure immediate safety and continuity of protection.</p>
-    </div>
-
-    <!-- 5 -->
-    <div class="activity-card reveal rd1" data-cat="faith community">
-      <div class="activity-card-top">
-        <div class="activity-num">05</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <div>
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a href="partnerships.html">Partnerships</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="conferences.html">Conferences</a></li>
+          <li><a href="countries.html">Countries</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact">
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>info@hgymission.org</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Africa</span>
+          </div>
         </div>
       </div>
-      <div class="activity-tag">Faith</div>
-      <div class="activity-cat">Church Partnership</div>
-      <h3 class="activity-title">Church-Based Protection Partnerships</h3>
-      <p class="activity-desc">Mobilise local churches and faith institutions as community protection hubs that provide shelter, accompaniment, referrals, and moral support to at-risk individuals and families.</p>
     </div>
-
-    <!-- 6 -->
-    <div class="activity-card reveal rd2" data-cat="legal">
-      <div class="activity-card-top">
-        <div class="activity-num">06</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Legal</div>
-      <div class="activity-cat">Rights Awareness</div>
-      <h3 class="activity-title">Legal Referral and Rights Awareness</h3>
-      <p class="activity-desc">Link survivors and defenders to legal aid providers, document abuses, and educate communities on rights, reporting mechanisms, and available protection systems.</p>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2025 HGY Mission. All rights reserved.</div>
+      <div class="footer-reg">Holy Ground of Yahweh Mission</div>
     </div>
+  </footer>
 
-    <!-- 7 -->
-    <div class="activity-card reveal" data-cat="faith">
-      <div class="activity-card-top">
-        <div class="activity-num">07</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Faith</div>
-      <div class="activity-cat">Pastoral Care</div>
-      <h3 class="activity-title">Spiritual Care and Faith-Based Healing</h3>
-      <p class="activity-desc">Provide pastoral counselling, prayer support, spiritual accompaniment, and faith-sensitive healing approaches for individuals whose trauma intersects with spiritual distress.</p>
-    </div>
-
-    <!-- 8 -->
-    <div class="activity-card reveal rd1" data-cat="community">
-      <div class="activity-card-top">
-        <div class="activity-num">08</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Community</div>
-      <div class="activity-cat">Prevention</div>
-      <h3 class="activity-title">Community Dialogue and Prevention Programmes</h3>
-      <p class="activity-desc">Facilitate discussions with families, religious leaders, youth, and community actors to prevent violence, challenge harmful norms, and promote dignity, equality, and nonviolence.</p>
-    </div>
-
-    <!-- 9 -->
-    <div class="activity-card reveal rd2" data-cat="legal community">
-      <div class="activity-card-top">
-        <div class="activity-num">09</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Training</div>
-      <div class="activity-cat">Capacity Building</div>
-      <h3 class="activity-title">Capacity Building for Human Rights Defenders</h3>
-      <p class="activity-desc">Train defenders in personal security, documentation, digital safety, stress management, and resilience to strengthen their protection capacity and long-term effectiveness.</p>
-    </div>
-
-    <!-- 10 -->
-    <div class="activity-card reveal" data-cat="survivor community">
-      <div class="activity-card-top">
-        <div class="activity-num">10</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Survivor</div>
-      <div class="activity-cat">Reintegration</div>
-      <h3 class="activity-title">Livelihood and Reintegration Support</h3>
-      <p class="activity-desc">Help survivors regain stability through skills training, small livelihood support, and reintegration pathways that reduce vulnerability and restore independence after crisis.</p>
-    </div>
-
-    <!-- 11 -->
-    <div class="activity-card reveal rd1" data-cat="emergency legal">
-      <div class="activity-card-top">
-        <div class="activity-num">11</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Emergency</div>
-      <div class="activity-cat">Referral Network</div>
-      <h3 class="activity-title">Referral Network for Medical and Shelter Services</h3>
-      <p class="activity-desc">Maintain rapid referral systems for medical care, temporary shelter, legal support, and emergency response for urgent protection cases requiring immediate intervention.</p>
-    </div>
-
-    <!-- 12 -->
-    <div class="activity-card reveal rd2" data-cat="legal">
-      <div class="activity-card-top">
-        <div class="activity-num">12</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Legal</div>
-      <div class="activity-cat">Documentation</div>
-      <h3 class="activity-title">Advocacy and Documentation</h3>
-      <p class="activity-desc">Document cases, monitor violations, and advocate for accountability while protecting survivor confidentiality and dignity at every stage of the process.</p>
-    </div>
-
-    <!-- 13 -->
-    <div class="activity-card reveal" data-cat="community faith">
-      <div class="activity-card-top">
-        <div class="activity-num">13</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Community</div>
-      <div class="activity-cat">Reconciliation</div>
-      <h3 class="activity-title">Peacebuilding and Social Cohesion</h3>
-      <p class="activity-desc">Use faith-based dialogue to reduce tensions, rebuild trust, and support reconciliation in communities affected by conflict or violence, fostering lasting social healing.</p>
-    </div>
-
-    <!-- 14 -->
-    <div class="activity-card reveal rd1" data-cat="survivor legal">
-      <div class="activity-card-top">
-        <div class="activity-num">14</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Legal</div>
-      <div class="activity-cat">Case Management</div>
-      <h3 class="activity-title">Confidential Case Management</h3>
-      <p class="activity-desc">Develop secure systems for handling sensitive survivor and defender information, ensuring confidentiality, ethical follow-up, and protection from further harm throughout the process.</p>
-    </div>
-
-    <!-- 15 -->
-    <div class="activity-card reveal rd2" data-cat="emergency">
-      <div class="activity-card-top">
-        <div class="activity-num">15</div>
-        <div class="activity-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13"/></svg>
-        </div>
-      </div>
-      <div class="activity-tag">Emergency</div>
-      <div class="activity-cat">Crisis Intervention</div>
-      <h3 class="activity-title">Rapid Response for Crisis Situations</h3>
-      <p class="activity-desc">Maintain emergency mechanisms for urgent transport, safe referrals, crisis counselling, and immediate intervention when threats escalate — available when every moment counts.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- CTA BAND -->
-<section class="cta-band">
-  <div class="cta-inner">
-    <div class="cta-label">Take Action</div>
-    <h2 class="cta-title">Stand with those who<br/>have no one else.</h2>
-    <p class="cta-body">Every one of these 15 activities is powered by donors, volunteers, and faith communities that believe justice is not optional. Join us.</p>
-    <div class="cta-btns">
-      <a href="index.html#donate" class="btn-light">Donate Now</a>
-      <a href="index.html#join" class="btn-outline">Join the Team</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <a href="index.html" class="footer-back">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back to main site
-  </a>
-  <div class="footer-bottom">
-    <span class="footer-copy">&#169; 2026 Holy Ground of Yahweh Mission. All rights reserved.</span>
-    <span class="footer-reg">Founded 2017 &#183; Faith-Driven Human Rights</span>
-  </div>
-</footer>
-
-<script>
-/* Cursor */
-if(window.matchMedia('(pointer:fine)').matches){
-  const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-  (function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
-  document.querySelectorAll('a,button,.activity-card,.filter-btn').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px'});
-    el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px'});
-  });
-}
-
-/* Nav */
-window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40)},{passive:true});
-const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
-burger.addEventListener('click',()=>{burger.classList.toggle('open');navLinks.classList.toggle('open')});
-navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');navLinks.classList.remove('open')}));
-
-/* Reveal */
-const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.07});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
-/* Filter */
-function filterActivities(cat, btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.activity-card').forEach(card=>{
-    if(cat==='all'||card.dataset.cat.includes(cat)){
-      card.style.display='';
-    } else {
-      card.style.display='none';
-    }
-  });
-}
-</script>
+  <script>
+    if(window.matchMedia('(pointer:fine)').matches){const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});(function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();document.querySelectorAll('a,button,.activity-card,.timeline-item').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px'});el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px'})})}
+    window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+    const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');burger.addEventListener('click',()=>{burger.classList.toggle('open');navLinks.classList.toggle('open')});navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');navLinks.classList.remove('open')}));
+    const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  </script>
 </body>
 </html>
