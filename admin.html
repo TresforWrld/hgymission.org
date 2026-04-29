@@ -500,10 +500,10 @@
 /* ═══ CONFIG ═══ */
 const JSONBIN_API = 'https://api.jsonbin.io/v3/b';
 let CFG = {
-  key: localStorage.getItem('hgy_key') || '',
-  apps: localStorage.getItem('hgy_apps') || '',
-  tickets: localStorage.getItem('hgy_tickets') || '',
-  msgs: localStorage.getItem('hgy_msgs') || ''
+  key: localStorage.getItem('hgy_key') || '$2a$10$VJXQzwtVgNhMTIJiiQvpy.hG7XaRD0.H42NyZhKzeLRungeekMmpO',
+  apps: localStorage.getItem('hgy_apps') || '69f17c78856a682189856e7d',
+  tickets: localStorage.getItem('hgy_tickets') || '69f17d20856a6821898571e4',
+  msgs: localStorage.getItem('hgy_msgs') || '69f17da1aaba8821974d7d41'
 };
 let ADMIN = {
   user: localStorage.getItem('hgy_admin_user') || 'admin',
@@ -522,16 +522,32 @@ function doLogin(){
   const u=document.getElementById('loginUser').value.trim();
   const p=document.getElementById('loginPass').value;
   if(u===ADMIN.user && p===ADMIN.pass){
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('dashboardWrap').style.display='flex';
-    loadAllData();
-    loadSettings();
+    localStorage.setItem('hgy_session','1');
+    localStorage.setItem('hgy_session_user',u);
+    showDashboard();
   } else {
     document.getElementById('loginErr').style.display='block';
   }
 }
 
+function showDashboard(){
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('dashboardWrap').style.display='flex';
+  loadAllData();
+  loadSettings();
+}
+
+// Auto-login on reload if session exists
+(function checkSession(){
+  const session = localStorage.getItem('hgy_session');
+  if(session === '1'){
+    showDashboard();
+  }
+})();
+
 document.getElementById('logoutBtn').addEventListener('click',()=>{
+  localStorage.removeItem('hgy_session');
+  localStorage.removeItem('hgy_session_user');
   document.getElementById('dashboardWrap').style.display='none';
   document.getElementById('loginScreen').classList.remove('hidden');
   document.getElementById('loginPass').value='';
