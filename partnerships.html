@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Partnerships — HGY Mission</title>
+  <meta name="description" content="HGY Mission works through a strong and growing network of more than 120 civil society organisations, churches, and grassroots activists across over seven countries."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    body::before{content:'';position:fixed;inset:0;z-index:-1;
+      background:radial-gradient(ellipse 70% 55% at 8% 12%,rgba(92,10,46,0.07) 0%,transparent 55%),
+        radial-gradient(ellipse 55% 45% at 92% 88%,rgba(163,49,90,0.06) 0%,transparent 55%),#fff;
+      pointer-events:none}
+    .partner-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+    .partner-stat{background:var(--gb);border:1px solid var(--gborder);backdrop-filter:var(--blurs);border-radius:18px;padding:2rem 1.6rem;text-align:center;transition:transform .25s,box-shadow .25s}
+    .partner-stat:hover{transform:translateY(-5px);box-shadow:0 20px 52px rgba(92,10,46,.12)}
+    .partner-stat-num{font-family:'Space Mono',monospace;font-size:2.6rem;font-weight:700;color:var(--p);line-height:1}
+    .partner-stat-label{font-size:.78rem;color:var(--muted);margin-top:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+    .partner-types{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
+    .partner-type{background:var(--gb);border:1px solid var(--gborder);backdrop-filter:var(--blurs);border-radius:18px;padding:2rem;display:flex;gap:1.2rem;align-items:flex-start;transition:transform .25s,box-shadow .25s}
+    .partner-type:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(92,10,46,.10)}
+    .partner-type-icon{width:48px;height:48px;border-radius:14px;background:rgba(92,10,46,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .partner-type-icon svg{width:22px;height:22px;stroke:var(--p)}
+    .partner-type-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--pd);margin-bottom:.35rem}
+    .partner-type-desc{font-size:.85rem;line-height:1.7;color:var(--muted)}
+    .cta-banner{background:var(--pd);padding:6rem 3rem;text-align:center;position:relative;overflow:hidden}
+    .cta-banner::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(-55deg,transparent,transparent 40px,rgba(255,255,255,.02) 40px,rgba(255,255,255,.02) 41px)}
+    .cta-banner-inner{position:relative;z-index:2;max-width:640px;margin:0 auto}
+    .cta-banner .section-title{color:#fff}
+    .cta-banner .section-body{color:rgba(255,255,255,.5)}
+    .cta-banner .btn-primary{margin-top:2rem}
+    .img-full{width:100%;border-radius:24px;object-fit:cover;box-shadow:0 24px 72px rgba(92,10,46,.18)}
+    @media(max-width:768px){
+      .partner-stats{grid-template-columns:1fr}
+      .partner-types{grid-template-columns:1fr}
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Nav -->
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="https://i.imgur.com/OuzA14x.png" alt="HGY"/>
+      <div class="nav-logo-text">
+        <span class="nav-logo-abbr">HGY Mission</span>
+        <span class="nav-logo-sub">Holy Ground of Yahweh</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="partnerships.html" class="active-link">Partnerships</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="activities.html">Activities</a></li>
+      <li><a href="conferences.html">Conferences</a></li>
+      <li><a href="countries.html">Countries</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb">
+        <a href="index.html">Home</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <span>Partnerships</span>
+      </div>
+      <div class="page-eyebrow">Our Network</div>
+      <h1 class="page-title">Building <em>Strength</em> Through Partnership</h1>
+      <p class="page-body">HGY Mission works through a strong and growing network of more than 120 civil society organisations, churches, community based groups, advocates, and grassroots activists across over seven countries.</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="content-section">
+    <div class="partner-stats reveal">
+      <div class="partner-stat rd1">
+        <div class="partner-stat-num">120+</div>
+        <div class="partner-stat-label">Partner Organisations</div>
+      </div>
+      <div class="partner-stat rd2">
+        <div class="partner-stat-num">7+</div>
+        <div class="partner-stat-label">Countries Covered</div>
+      </div>
+      <div class="partner-stat rd3">
+        <div class="partner-stat-num">50+</div>
+        <div class="partner-stat-label">Faith Communities</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="content-section">
+    <div class="content-grid">
+      <div>
+        <div class="section-label reveal">Central to Our Mission</div>
+        <h2 class="section-title reveal">Partnerships Are the Foundation</h2>
+        <p class="section-body reveal">These partnerships are central to our mission because they create the local trust, reach, and collaboration needed to respond effectively to complex humanitarian and social justice challenges. Each partnership contributes unique knowledge, lived experience, and practical capacity that strengthens our collective work in advancing justice, freedom, dignity, and inclusion.</p>
+        <p class="section-body reveal">By collaborating with local actors, faith communities, legal practitioners, youth leaders, and protection networks, HGY Mission is able to build responses that are locally grounded while addressing broader regional concerns.</p>
+      </div>
+      <div class="reveal rd2">
+        <img src="https://images.unsplash.com/photo-1529156069898-4996e39c6644?w=600&h=750&fit=crop" alt="Community partnership meeting" class="img-full" style="aspect-ratio:4/5"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnership Types -->
+  <section class="content-section dark">
+    <div style="text-align:center;margin-bottom:3rem">
+      <div class="section-label reveal" style="justify-content:center">How We Partner</div>
+      <h2 class="section-title reveal">Types of Collaboration</h2>
+    </div>
+    <div class="partner-types reveal">
+      <div class="partner-type dark">
+        <div class="partner-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div>
+          <div class="partner-type-title">Joint Advocacy</div>
+          <div class="partner-type-desc">Our partnerships create opportunities for joint advocacy, enabling stronger voices for justice and policy reform at local, national, and regional levels.</div>
+        </div>
+      </div>
+      <div class="partner-type dark">
+        <div class="partner-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div>
+          <div class="partner-type-title">Referral Systems</div>
+          <div class="partner-type-desc">Collaborative referral pathways connect vulnerable individuals to critical services including legal aid, shelter, psychosocial support, and emergency care.</div>
+        </div>
+      </div>
+      <div class="partner-type dark">
+        <div class="partner-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <div class="partner-type-title">Emergency Response</div>
+          <div class="partner-type-desc">Coordinated emergency response ensures rapid assistance for individuals and communities facing immediate protection risks and humanitarian crises.</div>
+        </div>
+      </div>
+      <div class="partner-type dark">
+        <div class="partner-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div>
+          <div class="partner-type-title">Skills Exchange</div>
+          <div class="partner-type-desc">Skills exchange between partner organisations strengthens local capacity, builds technical expertise, and fosters sustainable community transformation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section with Image -->
+  <section class="content-section">
+    <div class="content-grid reverse">
+      <div>
+        <div class="section-label reveal">Lasting Change</div>
+        <h2 class="section-title reveal">Strengthening Local Ownership of Change</h2>
+        <p class="section-body reveal">Through these relationships, we continue to expand impact while strengthening local ownership of change. Our partnerships also create opportunities for long term community transformation, ensuring that the work of justice and dignity does not depend solely on external actors but is rooted in the communities themselves.</p>
+        <p class="section-body reveal">We believe that sustainable change happens when communities lead their own transformation, supported by networks of trust and solidarity that span across borders and sectors.</p>
+      </div>
+      <div class="content-img reveal rd2">
+        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&h=750&fit=crop" alt="Community collaboration and support" class="img-full" style="aspect-ratio:4/5"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="cta-banner-inner reveal">
+      <h2 class="section-title">Become a Partner</h2>
+      <p class="section-body">Join our growing network of organisations, churches, and advocates working together for justice, freedom, dignity, and inclusion across Africa.</p>
+      <a href="mailto:info@hgymission.org" class="btn-primary">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <a href="index.html" class="footer-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to Home
+    </a>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="https://i.imgur.com/OuzA14x.png" alt="HGY"/>
+          <div><div class="footer-abbr">HGY Mission</div><div class="footer-full">Holy Ground of Yahweh</div></div>
+        </div>
+        <p class="footer-tagline">A faith driven human rights organisation standing for the weak, the marginalised, and the forgotten.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a href="partnerships.html">Partnerships</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="conferences.html">Conferences</a></li>
+          <li><a href="countries.html">Countries</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact">
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>info@hgymission.org</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Africa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2025 HGY Mission. All rights reserved.</div>
+      <div class="footer-reg">Holy Ground of Yahweh Mission</div>
+    </div>
+  </footer>
+
+  <script>
+    if(window.matchMedia('(pointer:fine)').matches){const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});(function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();document.querySelectorAll('a,button,.partner-stat,.partner-type').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px'});el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px'})})}
+    window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+    const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');burger.addEventListener('click',()=>{burger.classList.toggle('open');navLinks.classList.toggle('open')});navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');navLinks.classList.remove('open')}));
+    const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  </script>
+</body>
+</html>
