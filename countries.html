@@ -15,9 +15,9 @@
         radial-gradient(ellipse 55% 45% at 92% 88%,rgba(163,49,90,0.06) 0%,transparent 55%),#fff;
       pointer-events:none}
 
-    /* HERO with full image, no crop, no overlay, no text */
-    .page-hero{width:100%;padding-top:70px;line-height:0}
-    .hero-img{width:100%;height:auto;display:block;object-fit:contain}
+    /* HERO — full image, natural aspect ratio, no crop, no shrink */
+    .page-hero{width:100%;margin-top:70px;line-height:0;font-size:0}
+    .hero-img{display:block;width:100%;height:auto;max-width:100%}
 
     /* CONTENT */
     .content-section{padding:5rem 3rem;max-width:1100px;margin:0 auto}
