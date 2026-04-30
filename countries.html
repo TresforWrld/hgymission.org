@@ -3,99 +3,160 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Countries — HGY Mission</title>
-  <meta name="description" content="HGY Mission currently works across Uganda, Kenya, Rwanda, South Sudan, Democratic Republic of the Congo, Tanzania, and Burundi, with interventions adapted to local realities."/>
+  <title>Partnerships — HGY Mission</title>
+  <meta name="description" content="HGY Mission is expanding partnerships across Africa and beyond, working with CSOs, churches, human rights organizations, and community leaders."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="shared.css"/>
   <style>
+    :root{
+      --p:#5c0a2e;
+      --pd:#3d0720;
+      --pa:rgba(92,10,46,0.08);
+      --muted:rgba(60,10,30,0.58);
+      --gb:rgba(255,255,255,0.72);
+      --gborder:rgba(92,10,46,0.10);
+      --blurs:blur(18px);
+      --gh:rgba(255,255,255,0.92);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Nunito',sans-serif;color:#2a0814;background:#fff;overflow-x:hidden}
+
     body::before{content:'';position:fixed;inset:0;z-index:-1;
       background:radial-gradient(ellipse 70% 55% at 8% 12%,rgba(92,10,46,0.07) 0%,transparent 55%),
         radial-gradient(ellipse 55% 45% at 92% 88%,rgba(163,49,90,0.06) 0%,transparent 55%),#fff;
       pointer-events:none}
-    #countryMap{width:100%;height:500px;border-radius:20px;border:1px solid rgba(92,10,46,.1);z-index:2;box-shadow:0 16px 52px rgba(92,10,46,.10)}
-    .country-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:3rem}
-    .country-card{background:var(--gb);border:1px solid var(--gborder);backdrop-filter:var(--blurs);border-radius:22px;overflow:hidden;transition:transform .25s,box-shadow .25s,background .25s}
-    .country-card:hover{transform:translateY(-6px);box-shadow:0 24px 56px rgba(92,10,46,.14);background:var(--gh)}
-    .country-card-img-wrap{position:relative;width:100%;height:200px;overflow:hidden}
-    .country-card-img{width:100%;height:200px;object-fit:cover;display:block}
-    .country-flag-badge{position:absolute;top:12px;right:14px;font-size:2rem;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));z-index:3}
-    .country-card-body{padding:1.8rem 1.6rem 2rem}
-    .country-card-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--pd);margin-bottom:.45rem}
-    .country-card-desc{font-size:.87rem;line-height:1.75;color:var(--muted)}
-    .country-card-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(92,10,46,.08);color:var(--p);padding:.28rem .75rem;border-radius:100px;font-weight:700;margin-top:.8rem}
 
-    /* ─── APPROACH SECTION — inverted to light ─── */
-    .approach-section{
-      background:#fdf6f9;
-      border-top:1px solid rgba(92,10,46,.10);
-      border-bottom:1px solid rgba(92,10,46,.10);
-      padding:6rem 3rem;
-      position:relative;
-      overflow:hidden;
-    }
-    .approach-section::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background-image:repeating-linear-gradient(-55deg,transparent,transparent 40px,rgba(92,10,46,.025) 40px,rgba(92,10,46,.025) 41px);
-    }
-    .approach-inner{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}
+    /* NAV */
+    nav#mainNav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;transition:background .3s,box-shadow .3s}
+    nav#mainNav.scrolled{background:rgba(255,255,255,0.94);backdrop-filter:blur(20px);box-shadow:0 2px 20px rgba(92,10,46,.08)}
+    .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+    .nav-logo img{height:42px;width:auto}
+    .nav-logo-abbr{display:block;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--p);line-height:1}
+    .nav-logo-sub{display:block;font-size:.65rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{text-decoration:none;font-size:.85rem;font-weight:600;color:#2a0814;letter-spacing:.02em;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active-link{color:var(--p)}
+    .nav-cta{background:var(--p);color:#fff!important;padding:.5rem 1.2rem;border-radius:100px;transition:background .2s!important}
+    .nav-cta:hover{background:var(--pd)!important}
+    .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem}
+    .nav-burger span{display:block;width:24px;height:2px;background:var(--p);border-radius:2px;transition:.3s}
 
-    /* label, title, body now use the dark page colours */
-    .approach-section .section-label{
-      color:rgba(92,10,46,.55);
-      justify-content:center;
-    }
-    .approach-section .section-label::before{
-      background:rgba(92,10,46,.35);
-    }
-    .approach-section .section-title{
-      color:#5c0a2e; /* var(--pd) */
-    }
-    .approach-section .section-body{
-      color:rgba(60,10,30,.60);
-      font-size:.97rem;
-      line-height:1.8;
-    }
+    /* HERO with full-width image */
+    .page-hero{position:relative;min-height:70vh;display:flex;align-items:flex-end;overflow:hidden}
+    .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(30,4,16,0.85) 0%, rgba(30,4,16,0.45) 50%, rgba(30,4,16,0.15) 100%);z-index:1}
+    .page-hero-inner{position:relative;z-index:2;padding:5rem 3rem 4rem;max-width:900px}
+    .page-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:rgba(255,255,255,0.65);margin-bottom:1rem}
+    .page-breadcrumb a{color:rgba(255,255,255,0.65);text-decoration:none}
+    .page-breadcrumb svg{width:14px;height:14px;stroke:rgba(255,255,255,0.4)}
+    .page-eyebrow{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,200,200,0.8);margin-bottom:.8rem}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1.2rem}
+    .page-title em{font-style:italic;color:rgba(255,160,160,0.9)}
+    .page-body{font-size:1rem;line-height:1.75;color:rgba(255,255,255,0.78);max-width:620px}
 
-    /* pillars */
-    .approach-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
-    .approach-pillar{
-      background:#fff;
-      border:1px solid rgba(92,10,46,.12);
-      border-radius:16px;
-      padding:2rem 1.4rem;
-      text-align:center;
-      box-shadow:0 4px 20px rgba(92,10,46,.06);
-      transition:transform .22s,box-shadow .22s;
+    /* CONTENT */
+    .content-section{padding:5rem 3rem;max-width:1100px;margin:0 auto}
+
+    .section-label{display:flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(92,10,46,.55);margin-bottom:.8rem}
+    .section-label::before{content:'';display:inline-block;width:22px;height:2px;background:rgba(92,10,46,.35);border-radius:2px}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;color:var(--pd);line-height:1.2;margin-bottom:1.2rem}
+    .section-title em{font-style:italic;color:var(--p)}
+    .section-body{font-size:.97rem;line-height:1.8;color:var(--muted);max-width:680px}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* INTRO PROSE SECTION */
+    .prose-section{padding:5rem 3rem;max-width:800px;margin:0 auto}
+    .prose-section p{font-size:1rem;line-height:1.85;color:rgba(42,8,20,0.75);margin-bottom:1.4rem}
+    .prose-section p:last-child{margin-bottom:0}
+    .prose-section h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--pd);margin:2.5rem 0 1rem}
+
+    /* WHO CAN PARTNER — two column list */
+    .partner-types-section{background:#fdf6f9;border-top:1px solid rgba(92,10,46,.08);border-bottom:1px solid rgba(92,10,46,.08);padding:5rem 3rem}
+    .partner-types-inner{max-width:1000px;margin:0 auto}
+    .partner-types-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.5rem}
+    .partner-type-item{display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid rgba(92,10,46,.10);border-radius:14px;padding:1.1rem 1.4rem;box-shadow:0 2px 12px rgba(92,10,46,.04);transition:transform .2s,box-shadow .2s}
+    .partner-type-item:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(92,10,46,.10)}
+    .partner-type-dot{width:10px;height:10px;border-radius:50%;background:var(--p);flex-shrink:0}
+    .partner-type-label{font-size:.9rem;font-weight:600;color:var(--pd)}
+
+    /* HOW TO WORK — horizontal cards */
+    .how-section{padding:5rem 3rem;max-width:1100px;margin:0 auto}
+    .how-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem}
+    .how-card{background:var(--gb);border:1px solid var(--gborder);border-radius:20px;padding:2rem 1.6rem;transition:transform .22s,box-shadow .22s,background .22s}
+    .how-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(92,10,46,.12);background:var(--gh)}
+    .how-card-num{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:rgba(92,10,46,.4);margin-bottom:.8rem;text-transform:uppercase}
+    .how-card-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--pd);margin-bottom:.6rem}
+    .how-card-desc{font-size:.83rem;line-height:1.7;color:var(--muted)}
+
+    /* BECOME A PARTNER */
+    .become-section{background:linear-gradient(135deg,#5c0a2e 0%,#8b1545 60%,#a3315a 100%);padding:5rem 3rem;position:relative;overflow:hidden}
+    .become-section::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 50px,rgba(255,255,255,.025) 50px,rgba(255,255,255,.025) 51px);pointer-events:none}
+    .become-inner{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}
+    .become-inner .section-label{color:rgba(255,200,200,.6);justify-content:center}
+    .become-inner .section-label::before{background:rgba(255,200,200,.4)}
+    .become-inner .section-title{color:#fff}
+    .become-inner .section-title em{color:rgba(255,200,200,.9)}
+    .become-inner p{font-size:.97rem;line-height:1.8;color:rgba(255,255,255,0.72);margin-bottom:2.5rem}
+    .become-list{text-align:left;display:inline-block;margin:0 auto 2.5rem}
+    .become-list li{font-size:.9rem;color:rgba(255,255,255,0.8);line-height:1.7;padding:.3rem 0;list-style:none;display:flex;align-items:flex-start;gap:.7rem}
+    .become-list li::before{content:'→';color:rgba(255,160,160,.8);flex-shrink:0;margin-top:.05rem}
+    .become-cta{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:var(--p);font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;padding:.9rem 2rem;border-radius:100px;text-decoration:none;transition:transform .2s,box-shadow .2s}
+    .become-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.2)}
+
+    /* FOOTER */
+    footer{background:#1a0410;color:rgba(255,255,255,0.75);padding:4rem 3rem 2rem}
+    .footer-back{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;color:rgba(255,255,255,0.5);font-size:.8rem;margin-bottom:3rem;transition:color .2s}
+    .footer-back:hover{color:#fff}
+    .footer-back svg{width:14px;height:14px;stroke:currentColor}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1.5fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.08)}
+    .footer-brand-logo{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+    .footer-brand-logo img{height:40px;width:auto}
+    .footer-abbr{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff}
+    .footer-full{font-size:.65rem;color:rgba(255,255,255,.35);letter-spacing:.05em}
+    .footer-tagline{font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.4);max-width:280px;margin-bottom:1.5rem}
+    .footer-socials{display:flex;gap:.7rem}
+    .social-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;transition:background .2s,color .2s}
+    .social-btn:hover{background:var(--p);color:#fff}
+    .social-btn svg{width:15px;height:15px}
+    .footer-col-title{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1rem}
+    .footer-links{list-style:none}
+    .footer-links li{margin-bottom:.5rem}
+    .footer-links a{text-decoration:none;font-size:.83rem;color:rgba(255,255,255,.45);transition:color .2s}
+    .footer-links a:hover{color:#fff}
+    .footer-contact{display:flex;flex-direction:column;gap:.8rem}
+    .footer-contact-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:rgba(255,255,255,.45)}
+    .footer-contact-item svg{width:14px;height:14px;stroke:currentColor;flex-shrink:0;margin-top:.15rem}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;flex-wrap:wrap;gap:.5rem}
+    .footer-copy{font-size:.75rem;color:rgba(255,255,255,.25)}
+
+    /* CURSOR */
+    .cursor-dot,.cursor-ring{display:none}
+    @media(pointer:fine){
+      .cursor-dot{display:block;position:fixed;width:8px;height:8px;background:var(--p);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+      .cursor-ring{display:block;position:fixed;width:34px;height:34px;border:2px solid rgba(92,10,46,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s}
     }
-    .approach-pillar:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(92,10,46,.12)}
-    .approach-pillar-icon{
-      width:44px;height:44px;border-radius:13px;
-      background:rgba(92,10,46,.08);
-      display:flex;align-items:center;justify-content:center;
-      margin:0 auto 1rem;
-    }
-    .approach-pillar-icon svg{width:20px;height:20px;stroke:#5c0a2e}
-    .approach-pillar-title{
-      font-family:'Playfair Display',serif;
-      font-size:1rem;font-weight:700;
-      color:#5c0a2e;
-      margin-bottom:.35rem;
-    }
-    .approach-pillar-desc{font-size:.8rem;line-height:1.65;color:rgba(60,10,30,.58)}
 
     @media(max-width:768px){
-      .country-cards{grid-template-columns:1fr}
-      .approach-pillars{grid-template-columns:1fr}
-      #countryMap{height:350px}
+      nav#mainNav{padding:.9rem 1.5rem}
+      .nav-links{display:none;position:fixed;inset:0;background:rgba(255,255,255,.97);flex-direction:column;justify-content:center;align-items:center;gap:1.8rem;z-index:99}
+      .nav-links.open{display:flex}
+      .nav-burger{display:flex}
+      .page-hero-inner{padding:4rem 1.5rem 3rem}
+      .prose-section,.content-section,.how-section{padding:3rem 1.5rem}
+      .partner-types-section,.become-section{padding:3.5rem 1.5rem}
+      .partner-types-grid{grid-template-columns:1fr}
+      .how-cards{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      footer{padding:3rem 1.5rem 2rem}
     }
   </style>
-<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
   <div class="cursor-dot" id="cursorDot"></div>
@@ -122,156 +183,113 @@
     <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- Page Hero -->
+  <!-- Hero with uploaded image -->
   <section class="page-hero">
+    <img src="https://i.imgur.com/sicTMXD.jpeg" alt="HGY Mission partnerships across Africa" class="hero-img"/>
+    <div class="hero-overlay"></div>
     <div class="page-hero-inner">
       <div class="page-breadcrumb">
         <a href="index.html">Home</a>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        <span>Countries</span>
+        <span>Partnerships</span>
       </div>
-      <div class="page-eyebrow">Our Reach</div>
-      <h1 class="page-title">Countries We <em>Work In</em></h1>
-      <p class="page-body">HGY Mission currently works across Uganda, Kenya, Rwanda, South Sudan, Democratic Republic of the Congo, Tanzania, and Burundi, with interventions adapted to local realities and delivered through trusted partnerships that understand community needs.</p>
+      <div class="page-eyebrow">Expanding Reach</div>
+      <h1 class="page-title">Partnerships Across <em>Africa & Beyond</em></h1>
+      <p class="page-body">At HGY Mission, we believe that meaningful and lasting change is achieved through strong partnerships, solidarity, and community-driven action.</p>
     </div>
   </section>
 
-  <!-- Interactive Map -->
-  <section class="content-section">
-    <div style="text-align:center;margin-bottom:3rem">
-      <div class="section-label reveal" style="justify-content:center">Our Presence</div>
-      <h2 class="section-title reveal">Where We Operate</h2>
-    </div>
-    <div class="reveal" style="max-width:900px;margin:0 auto">
-      <div id="countryMap"></div>
-    </div>
-  </section>
+  <!-- Intro prose -->
+  <div class="prose-section reveal">
+    <p>Over the years, we have continued to build relationships with organizations, activists, churches, youth groups, and human rights defenders who are committed to creating safer, more inclusive, and more just communities.</p>
+    <p>Today, our work and partnerships extend across several countries, including <strong>Burundi, Mozambique, Zambia, Democratic Republic of the Congo, Uganda, Kenya, Rwanda, Sudan, and Afghanistan</strong>. Through these collaborations, we continue supporting vulnerable and marginalized communities facing discrimination, violence, inequality, conflict, and human rights violations.</p>
+    <p>Our mission focuses on promoting human rights, mental health and psychosocial support, youth empowerment, advocacy, education, peacebuilding, and community development. In many of the countries where we work, communities continue to face social exclusion, economic hardship, insecurity, and limited access to support services. By partnering with local organizations and community leaders, we are able to strengthen grassroots initiatives and create sustainable impact.</p>
 
-  <!-- Country Cards -->
-  <section class="content-section" style="padding-top:2rem">
-    <div style="text-align:center;margin-bottom:2rem">
-      <div class="section-label reveal" style="justify-content:center">Country Profiles</div>
-      <h2 class="section-title reveal">Deeply Rooted in Each Context</h2>
-    </div>
-    <div class="country-cards reveal">
+    <h2>Strengthening Partnerships for Greater Impact</h2>
+    <p>As HGY Mission continues to grow, we are actively seeking to establish new partnerships with organizations and institutions that share our vision of dignity, equality, justice, and community empowerment. We believe that partnerships are essential in addressing today's social and humanitarian challenges. Working together allows us to share knowledge, strengthen advocacy efforts, mobilize resources, and expand support to communities that need it most.</p>
+  </div>
 
-      <!-- Uganda -->
-      <div class="country-card rd1">
-        <div class="country-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1612673167286-a700a5cee7db?w=600&h=300&fit=crop" alt="Uganda landscape" class="country-card-img"/>
-          <span class="country-flag-badge">🇺🇬</span>
-        </div>
-        <div class="country-card-body">
-          <div class="country-card-name">Uganda</div>
-          <div class="country-card-desc">Working with local partners and faith communities to provide legal aid, protection services, and community empowerment programmes across urban and rural Uganda.</div>
-          <span class="country-card-tag">East Africa</span>
-        </div>
+  <!-- Who can partner -->
+  <section class="partner-types-section">
+    <div class="partner-types-inner">
+      <div class="reveal">
+        <div class="section-label">Our Partners</div>
+        <h2 class="section-title">Who Can <em>Partner With Us?</em></h2>
+        <p class="section-body">We welcome partnerships from a wide range of organizations and movements. We especially value those dedicated to promoting human rights, supporting marginalized groups, empowering young people, and advancing social justice and peace.</p>
       </div>
-
-      <!-- Kenya -->
-      <div class="country-card rd2">
-        <div class="country-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1611348586755-53e7a036f07e?w=600&h=300&fit=crop" alt="Kenya landscape" class="country-card-img"/>
-          <span class="country-flag-badge">🇰🇪</span>
-        </div>
-        <div class="country-card-body">
-          <div class="country-card-name">Kenya</div>
-          <div class="country-card-desc">Supporting refugee communities, urban vulnerable populations, and advocacy networks through legal awareness, economic empowerment, and psychosocial support.</div>
-          <span class="country-card-tag">East Africa</span>
-        </div>
+      <div class="partner-types-grid reveal">
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Civil Society Organizations (CSOs)</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Community-Based Organizations (CBOs)</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Human Rights Organizations</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Churches and Faith-Based Organizations</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Youth and Student Movements</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Women-led Organizations</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Mental Health & Psychosocial Support Groups</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">International NGOs & Advocacy Networks</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Educational Institutions & Researchers</div></div>
+        <div class="partner-type-item"><div class="partner-type-dot"></div><div class="partner-type-label">Grassroots Community Initiatives</div></div>
       </div>
-
-      <!-- Rwanda -->
-      <div class="country-card rd3">
-        <div class="country-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=600&h=300&fit=crop" alt="Rwanda hills" class="country-card-img"/>
-          <span class="country-flag-badge">🇷🇼</span>
-        </div>
-        <div class="country-card-body">
-          <div class="country-card-name">Rwanda</div>
-          <div class="country-card-desc">Collaborating with civil society organisations on peacebuilding, gender based violence response, and community reconciliation initiatives in post conflict settings.</div>
-          <span class="country-card-tag">East Africa</span>
-        </div>
-      </div>
-
-      <!-- South Sudan -->
-      <div class="country-card">
-        <div class="country-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=600&h=300&fit=crop" alt="South Sudan" class="country-card-img"/>
-          <span class="country-flag-badge">🇸🇸</span>
-        </div>
-        <div class="country-card-body">
-          <div class="country-card-name">South Sudan</div>
-          <div class="country-card-desc">Providing emergency response, displacement support, and protection interventions for communities affected by ongoing conflict and humanitarian crisis.</div>
-          <span class="country-card-tag">East Africa</span>
-        </div>
-      </div>
-
-      <!-- DRC -->
-      <div class="country-card rd1">
-        <div class="country-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=600&h=300&fit=crop" alt="Democratic Republic of the Congo" class="country-card-img"/>
-          <span class="country-flag-badge">🇨🇩</span>
-        </div>
-        <div class="country-card-body">
-          <div class="country-card-name">Democratic Republic of the Congo</div>
-          <div class="country-card-desc">Working in conflict affected areas with GBV survivors, displaced families, and vulnerable communities through protection, legal aid, and psychosocial care.</div>
-          <span class="country-card-tag">Central Africa</span>
-        </div>
-      </div>
-
-      <!-- Tanzania -->
-      <div class="country-card rd2">
-        <div class="country-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&h=300&fit=crop" alt="Tanzania landscape" class="country-card-img"/>
-          <span class="country-flag-badge">🇹🇿</span>
-        </div>
-        <div class="country-card-body">
-          <div class="country-card-name">Tanzania</div>
-          <div class="country-card-desc">Supporting refugee populations and host communities with education initiatives, livelihood programmes, and community safeguarding systems.</div>
-          <span class="country-card-tag">East Africa</span>
-        </div>
-      </div>
-
-      <!-- Burundi -->
-      <div class="country-card rd3" style="grid-column:1/-1;max-width:calc(50% - 1rem);margin:0 auto">
-        <div class="country-card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&h=300&fit=crop" alt="Burundi landscape" class="country-card-img"/>
-          <span class="country-flag-badge">🇧🇮</span>
-        </div>
-        <div class="country-card-body">
-          <div class="country-card-name">Burundi</div>
-          <div class="country-card-desc">Partnering with local churches and community groups on peacebuilding, economic empowerment, and protection interventions tailored to local realities.</div>
-          <span class="country-card-tag">East Africa</span>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- Local Approach — LIGHT INVERTED -->
-  <section class="approach-section">
-    <div class="approach-inner reveal">
-      <div class="section-label">Our Approach</div>
-      <h2 class="section-title">Locally Grounded, <em>Regionally Connected</em></h2>
-      <p class="section-body">Every intervention is adapted to local realities and delivered through trusted partnerships that understand community needs. We do not impose one size fits all solutions but instead build on existing community strengths and knowledge.</p>
-      <div class="approach-pillars">
-        <div class="approach-pillar">
-          <div class="approach-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div class="approach-pillar-title">Trusted Partners</div>
-          <div class="approach-pillar-desc">Delivered through local organisations that understand community needs and have established trust.</div>
-        </div>
-        <div class="approach-pillar">
-          <div class="approach-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-          <div class="approach-pillar-title">Adapted Locally</div>
-          <div class="approach-pillar-desc">Interventions are shaped by local context, culture, and realities rather than imposed from outside.</div>
-        </div>
-        <div class="approach-pillar">
-          <div class="approach-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div class="approach-pillar-title">Community Owned</div>
-          <div class="approach-pillar-desc">Communities lead their own transformation, ensuring sustainability and lasting impact beyond project timelines.</div>
-        </div>
+  <!-- How to work with us -->
+  <section class="how-section">
+    <div class="reveal" style="text-align:center;margin-bottom:1rem">
+      <div class="section-label" style="justify-content:center">Collaboration</div>
+      <h2 class="section-title" style="text-align:center">How Potential Partners <em>Can Work With Us</em></h2>
+    </div>
+    <div class="how-cards reveal">
+      <div class="how-card">
+        <div class="how-card-num">01 — Program Collaboration</div>
+        <div class="how-card-title">Community Projects & Campaigns</div>
+        <div class="how-card-desc">Organizations can partner with HGY Mission on community projects, awareness campaigns, advocacy programs, conferences, workshops, youth activities, and humanitarian initiatives.</div>
       </div>
+      <div class="how-card">
+        <div class="how-card-num">02 — Advocacy</div>
+        <div class="how-card-title">Joint Human Rights Work</div>
+        <div class="how-card-desc">Partners can collaborate to raise awareness about discrimination, violence, inequality, and the protection of vulnerable communities through campaigns, public engagement, and policy advocacy.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-num">03 — Capacity Building</div>
+        <div class="how-card-title">Training & Leadership</div>
+        <div class="how-card-desc">We work with partners to strengthen leadership, community organizing, advocacy skills, volunteer development, and organizational capacity.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-num">04 — Outreach</div>
+        <div class="how-card-title">Community Education</div>
+        <div class="how-card-desc">Churches, CSOs, and human rights organizations can join us in conducting community education programs, mental health awareness sessions, peacebuilding activities, and youth empowerment initiatives.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-num">05 — Research</div>
+        <div class="how-card-title">Documentation & Storytelling</div>
+        <div class="how-card-desc">Partners can support research, storytelling, monitoring, and documentation of community challenges and human rights concerns to strengthen evidence-based advocacy.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-card-num">06 — Emergency Response</div>
+        <div class="how-card-title">Humanitarian Support</div>
+        <div class="how-card-desc">In areas affected by conflict, displacement, or persecution, partnerships help us provide psychosocial support, referrals, emergency response, and community protection services.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Become a partner CTA -->
+  <section class="become-section">
+    <div class="become-inner reveal">
+      <div class="section-label">Get Involved</div>
+      <h2 class="section-title">How to Become <em>a Partner</em></h2>
+      <p>Organizations interested in partnering with HGY Mission can begin by contacting us and sharing the following information. Following initial discussions, we identify shared goals and explore opportunities based on mutual respect, transparency, accountability, and shared impact.</p>
+      <ul class="become-list">
+        <li>A brief introduction of your organization</li>
+        <li>Mission and areas of work</li>
+        <li>Countries or communities served</li>
+        <li>Possible areas of collaboration</li>
+        <li>Previous or ongoing projects</li>
+        <li>Contact information for representatives</li>
+      </ul>
+      <a href="contact.html" class="become-cta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Get in Touch
+      </a>
     </div>
   </section>
 
@@ -313,35 +331,37 @@
           </div>
           <div class="footer-contact-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Africa</span>
+            <span>Ørbækvej 716, 5220 Odense SØ<br/>Denmark</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
+            <span>+45 60 29 90 42</span>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">&copy; 2025 HGY Mission. All rights reserved.</div>
-      <div class="footer-reg"></div>
     </div>
   </footer>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    if(window.matchMedia('(pointer:fine)').matches){const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});(function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();document.querySelectorAll('a,button,.country-card').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px'});el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px'})})}
+    if(window.matchMedia('(pointer:fine)').matches){
+      const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+      let mx=0,my=0,rx=0,ry=0;
+      document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+      (function loop(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+      document.querySelectorAll('a,button,.how-card,.partner-type-item').forEach(el=>{
+        el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px'});
+        el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px'});
+      });
+    }
     window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40)},{passive:true});
-    const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');burger.addEventListener('click',()=>{burger.classList.toggle('open');navLinks.classList.toggle('open')});navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');navLinks.classList.remove('open')}));
-    const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-    const map=L.map('countryMap').setView([-2,30],5);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
-    const hgyIcon=L.divIcon({className:'',html:'<div style="width:18px;height:18px;background:#a3315a;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4)"></div>',iconSize:[18,18],iconAnchor:[9,9]});
-    const countries=[
-      {name:'Uganda',lat:1.3733,lng:32.2903,desc:'Legal aid, protection, empowerment'},
-      {name:'Kenya',lat:-0.0236,lng:37.9062,desc:'Refugee support, advocacy, psychosocial care'},
-      {name:'Rwanda',lat:-1.9403,lng:29.8739,desc:'Peacebuilding, GBV response, reconciliation'},
-      {name:'South Sudan',lat:6.8770,lng:31.3075,desc:'Emergency response, displacement support'},
-      {name:'DRC',lat:-4.0383,lng:21.7587,desc:'GBV support, protection, legal aid'},
-      {name:'Tanzania',lat:-6.3690,lng:34.8888,desc:'Education, livelihoods, safeguarding'},
-      {name:'Burundi',lat:-3.3731,lng:29.9189,desc:'Peacebuilding, empowerment, protection'}
-    ];
-    countries.forEach(c=>{L.marker([c.lat,c.lng],{icon:hgyIcon}).addTo(map).bindPopup('<strong style="color:#5c0a2e">'+c.name+'</strong><br/>'+c.desc)});
+    const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
+    burger.addEventListener('click',()=>{burger.classList.toggle('open');navLinks.classList.toggle('open')});
+    navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');navLinks.classList.remove('open')}));
+    const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08});
+    document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   </script>
 </body>
 </html>
