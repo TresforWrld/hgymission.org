@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="shared.css"/>
   <style>
-    /* ─── Page background — matches about.html ─── */
     body::before{
       content:'';position:fixed;inset:0;z-index:-1;
       background:
@@ -20,65 +19,90 @@
       pointer-events:none;
     }
 
-    /* ─── Hero with full-bleed image ─── */
-    .page-hero{position:relative;overflow:hidden}
-    .page-hero-bg{position:absolute;inset:0;z-index:0}
-    .page-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
-    .page-hero-bg::after{
-      content:'';position:absolute;inset:0;
-      background:linear-gradient(to right,rgba(61,6,32,.86) 0%,rgba(61,6,32,.62) 55%,rgba(61,6,32,.28) 100%);
+    /* ── HERO — clean full-bleed image, no overlay, no text ── */
+    .prog-hero{
+      margin-top:70px; /* clear fixed nav */
+      width:100%;
+      line-height:0;
+      font-size:0;
     }
-    .page-hero-inner{position:relative;z-index:2}
-    .page-hero .page-breadcrumb a,
-    .page-hero .page-breadcrumb span{color:rgba(255,255,255,.55)}
-    .page-hero .page-breadcrumb svg{stroke:rgba(255,255,255,.35)}
-    .page-hero .page-eyebrow{color:rgba(255,255,255,.45)}
-    .page-hero .page-title{color:#fff}
-    .page-hero .page-title em{color:var(--pl)}
-    .page-hero .page-body{color:rgba(255,255,255,.55)}
+    .prog-hero img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:520px;
+      object-fit:cover;
+      object-position:center 40%;
+    }
 
-    /* ─── Quick-dates strip ─── */
+    /* ── DATES STRIP ── */
     .dates-strip{
       display:grid;grid-template-columns:repeat(5,1fr);
-      background:var(--pd);border-bottom:1px solid rgba(255,255,255,.06);
+      background:var(--pd);
     }
     .dates-item{
       padding:1.25rem 1.4rem;
-      border-right:1px solid rgba(255,255,255,.07);
+      border-right:1px solid rgba(255,255,255,.08);
       display:flex;flex-direction:column;gap:.3rem;
       transition:background .2s;cursor:default;
     }
     .dates-item:last-child{border-right:none}
     .dates-item:hover{background:rgba(255,255,255,.05)}
-    .dates-num{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.13em;color:rgba(255,255,255,.22);text-transform:uppercase}
+    .dates-num{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.13em;color:rgba(255,255,255,.25);text-transform:uppercase}
     .dates-name{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;color:#fff;line-height:1.2}
     .dates-date{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--pl);font-weight:700}
-    .dates-loc{font-size:.72rem;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:.28rem}
-    .dates-loc svg{width:10px;height:10px;stroke:rgba(255,255,255,.3);flex-shrink:0}
+    .dates-loc{font-size:.72rem;color:rgba(255,255,255,.38);display:flex;align-items:center;gap:.28rem}
+    .dates-loc svg{width:10px;height:10px;stroke:rgba(255,255,255,.32);flex-shrink:0}
 
-    /* ─── Program cards ─── */
+    /* ── PROGRAM CARDS ── */
     .programs-wrap{padding:5rem 3rem}
     .programs-intro{text-align:center;margin-bottom:4rem}
 
     .prog-card{
-      display:grid;grid-template-columns:1fr 1fr;
-      background:var(--gb);border:1px solid var(--gborder);
-      backdrop-filter:var(--blurs);border-radius:24px;
-      overflow:hidden;margin-bottom:2.5rem;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:1fr; /* key: both cells same height */
+      background:var(--gb);
+      border:1px solid var(--gborder);
+      backdrop-filter:var(--blurs);
+      border-radius:24px;
+      overflow:hidden;
+      margin-bottom:2.5rem;
       transition:transform .25s,box-shadow .25s,background .25s;
     }
     .prog-card:hover{transform:translateY(-5px);box-shadow:0 24px 60px rgba(92,10,46,.13);background:var(--gh)}
+
+    /* flip alternates image to the right */
     .prog-card.flip{direction:rtl}
     .prog-card.flip > *{direction:ltr}
 
-    .prog-img{overflow:hidden;min-height:340px;max-height:420px}
-    .prog-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .45s}
+    /* image cell — fills entire cell height, no overflow */
+    .prog-img{
+      position:relative;
+      overflow:hidden;
+      /* no min/max-height — let the text side dictate height */
+    }
+    .prog-img img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+      transition:transform .45s;
+    }
     .prog-card:hover .prog-img img{transform:scale(1.04)}
 
+    /* text cell */
     .prog-body{
-      padding:2.8rem 3rem;display:flex;flex-direction:column;
-      justify-content:center;gap:0;
+      padding:2.8rem 3rem;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:0;
     }
+
     .prog-num{
       font-family:'Space Mono',monospace;font-size:.58rem;
       letter-spacing:.18em;text-transform:uppercase;
@@ -86,6 +110,7 @@
       display:flex;align-items:center;gap:.5rem;
     }
     .prog-num::before{content:'';width:16px;height:1px;background:var(--pl)}
+
     .prog-badge{
       display:inline-flex;align-items:center;gap:.4rem;
       font-family:'Space Mono',monospace;font-size:.58rem;
@@ -95,8 +120,9 @@
       font-weight:700;margin-bottom:.9rem;width:fit-content;
     }
     .prog-badge svg{width:11px;height:11px;stroke:var(--p)}
+
     .prog-title{
-      font-family:'Playfair Display',serif;font-size:1.7rem;
+      font-family:'Playfair Display',serif;font-size:1.65rem;
       font-weight:900;color:var(--pd);line-height:1.15;margin-bottom:.5rem;
     }
     .prog-meta{display:flex;align-items:center;gap:1.1rem;margin-bottom:1rem;flex-wrap:wrap}
@@ -107,6 +133,7 @@
     }
     .prog-meta-item svg{width:12px;height:12px;stroke:var(--pl);flex-shrink:0}
     .prog-desc{font-size:.88rem;line-height:1.78;color:var(--muted);margin-bottom:1.3rem}
+
     .prog-tags{display:flex;flex-wrap:wrap;gap:.45rem}
     .prog-tag{
       display:flex;align-items:center;gap:.32rem;
@@ -117,8 +144,8 @@
     }
     .prog-tag svg{width:10px;height:10px;stroke:var(--p)}
 
-    /* ─── Impact cards — lifted from about.html values-grid pattern ─── */
-    .impact-section{padding:5rem 3rem;background:var(--bg,#faf7f9)}
+    /* ── IMPACT ── */
+    .impact-section{padding:5rem 3rem;background:#faf7f9}
     .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
     .impact-card{
       background:var(--gb);border:1px solid var(--gborder);backdrop-filter:var(--blurs);
@@ -132,46 +159,18 @@
     .impact-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--pd);margin-bottom:.45rem}
     .impact-desc{font-size:.85rem;line-height:1.7;color:var(--muted)}
 
-    /* ─── Inquiries — dark band matching about.html quote-section ─── */
-    .inq-section{
-      background:var(--pd);padding:6rem 3rem;
-      position:relative;overflow:hidden;
-    }
-    .inq-section::before{
-      content:'';position:absolute;inset:0;pointer-events:none;
-      background-image:repeating-linear-gradient(-55deg,transparent,transparent 40px,rgba(255,255,255,.018) 40px,rgba(255,255,255,.018) 41px);
-    }
-    .inq-inner{
-      position:relative;z-index:2;
-      display:grid;grid-template-columns:1fr 1fr;gap:5rem;
-      align-items:center;max-width:1100px;margin:0 auto;
-    }
-    .inq-label{
-      font-family:'Space Mono',monospace;font-size:.65rem;
-      letter-spacing:.18em;text-transform:uppercase;
-      color:rgba(255,255,255,.38);margin-bottom:.9rem;
-      display:flex;align-items:center;gap:.55rem;
-    }
+    /* ── INQUIRIES ── */
+    .inq-section{background:var(--pd);padding:6rem 3rem;position:relative;overflow:hidden}
+    .inq-section::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(-55deg,transparent,transparent 40px,rgba(255,255,255,.018) 40px,rgba(255,255,255,.018) 41px)}
+    .inq-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1100px;margin:0 auto}
+    .inq-label{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.9rem;display:flex;align-items:center;gap:.55rem}
     .inq-label::before{content:'';width:20px;height:1.5px;background:rgba(255,255,255,.28)}
-    .inq-title{
-      font-family:'Playfair Display',serif;
-      font-size:clamp(1.7rem,3vw,2.5rem);font-weight:900;
-      color:#fff;line-height:1.12;letter-spacing:-.02em;margin-bottom:1rem;
-    }
+    .inq-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:900;color:#fff;line-height:1.12;letter-spacing:-.02em;margin-bottom:1rem}
     .inq-body{font-size:.93rem;line-height:1.8;color:rgba(255,255,255,.48)}
     .inq-cards{display:flex;flex-direction:column;gap:.85rem}
-    .inq-card{
-      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
-      border-radius:16px;padding:1.2rem 1.4rem;
-      display:flex;align-items:flex-start;gap:.8rem;
-      transition:background .2s;
-    }
+    .inq-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:.8rem;transition:background .2s}
     .inq-card:hover{background:rgba(255,255,255,.11)}
-    .inq-card-ico{
-      width:36px;height:36px;border-radius:10px;
-      background:rgba(255,255,255,.1);display:flex;
-      align-items:center;justify-content:center;flex-shrink:0;
-    }
+    .inq-card-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .inq-card-ico svg{width:16px;height:16px;stroke:rgba(255,255,255,.72)}
     .inq-card-label{font-size:.62rem;font-weight:700;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.15rem;font-family:'Space Mono',monospace}
     .inq-card-val{font-size:.9rem;color:#fff;font-weight:600}
@@ -179,14 +178,23 @@
     .inq-card-val a:hover{color:#fff}
     .inq-card-val.small{font-size:.82rem;color:rgba(255,255,255,.5);font-weight:400;line-height:1.5}
 
-    /* ─── Mobile ─── */
+    /* ── MOBILE ── */
     @media(max-width:900px){
+      .prog-hero img{max-height:340px}
       .dates-strip{grid-template-columns:1fr 1fr}
-      .dates-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
-      .dates-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.07)}
-      .prog-card,.prog-card.flip{grid-template-columns:1fr;direction:ltr}
-      .prog-card.flip{direction:ltr}
-      .prog-img{min-height:240px;max-height:280px}
+      .dates-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+      .dates-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.08)}
+
+      .prog-card,.prog-card.flip{
+        grid-template-columns:1fr;
+        grid-template-rows:260px auto; /* fixed image height on mobile */
+        direction:ltr;
+      }
+      .prog-img{
+        /* on mobile: fixed height, image is not absolutely positioned */
+        position:relative;
+        height:260px;
+      }
       .prog-body{padding:2rem 1.6rem}
       .prog-title{font-size:1.3rem}
       .impact-grid{grid-template-columns:1fr}
@@ -198,6 +206,7 @@
     @media(max-width:480px){
       .dates-strip{grid-template-columns:1fr}
       .dates-item{border-right:none}
+      .prog-hero img{max-height:240px}
     }
   </style>
   <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
@@ -228,22 +237,10 @@
     <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- HERO -->
-  <section class="page-hero">
-    <div class="page-hero-bg">
-      <img src="https://i.imgur.com/lk5XtA9.jpeg" alt="Empowerment, dignity and hope"/>
-    </div>
-    <div class="page-hero-inner">
-      <div class="page-breadcrumb">
-        <a href="index.html">Home</a>
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        <span>Programs</span>
-      </div>
-      <div class="page-eyebrow">Gatherings</div>
-      <h1 class="page-title">Annual <em>Programs &amp; Summits</em></h1>
-      <p class="page-body">HGY Mission convenes annual programmes, summits, forums, and networks that bring together partners, activists, faith leaders, survivors, youth representatives, and development actors to build collective power for justice and lasting change.</p>
-    </div>
-  </section>
+  <!-- HERO — clean image, no overlay -->
+  <div class="prog-hero">
+    <img src="https://i.imgur.com/lk5XtA9.jpeg" alt="HGY Mission — Empowerment, Dignity and Hope"/>
+  </div>
 
   <!-- DATES STRIP -->
   <div class="dates-strip">
@@ -448,7 +445,7 @@
     </div>
   </section>
 
-  <!-- WHAT OUR PROGRAMS DELIVER -->
+  <!-- IMPACT -->
   <section class="impact-section">
     <div style="max-width:1100px;margin:0 auto">
       <div style="text-align:center;margin-bottom:1rem">
